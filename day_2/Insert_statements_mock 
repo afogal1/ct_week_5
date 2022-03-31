@@ -1,0 +1,87 @@
+-- Insert Statements for Mock DB
+
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	address,
+	billing_info
+) VALUES(
+	1,
+	'Terrall',
+	'McKinney',
+	'123 Main Street Chicago IL, 60606',
+	'4242-4242-4242-4242 623 06/22'
+);
+
+-- Check to see New Customer
+SELECT *
+FROM customer;
+
+-- Second way to insert into customer table
+INSERT INTO customer
+VALUES(
+	2,
+	'Ryan',
+	'Rhoades',
+	'124 Main Street Chicago IL, 60606',
+	'4242-4242-4242-4242 623 06/22'
+);
+
+INSERT INTO seller
+VALUES(
+	1,
+	'773-202-luna',
+	'Ranger Business',
+	'125 Main Street Chicago IL, 60601'
+);
+
+INSERT INTO inventory
+VALUES(
+	1,
+	10
+);
+
+INSERT INTO product 
+VALUES(
+	1,
+	100.00,
+	'PYTHON NOTES',
+	1,
+	1
+);
+
+INSERT INTO brand
+VALUES(
+	1,
+	'CODING TEMPLE BRAND',
+	1
+);
+
+INSERT INTO order_(
+	sub_total,
+	total_cost,
+	upc
+)
+VALUES(
+	200.00,
+	220.00,
+	1
+);
+
+-- ORDER TABLE VIEW 
+SELECT *
+FROM order_;
+
+-- Cart Insert 
+INSERT INTO cart(
+	customer_id,
+	order_id
+) VALUES(
+	2,
+	1
+);
+
+-- Cart Table View 
+SELECT *
+FROM cart;

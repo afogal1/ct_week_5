@@ -1,0 +1,39 @@
+-- Insert for Customer table
+INSERT INTO customer
+VALUES(
+	1,
+	'Brad',
+	'Pitt',
+	'04-21-1984',
+	1
+);
+
+-- Insert for Ticket table 
+INSERT INTO ticket
+VALUES(
+	1,
+	'03-28-2022',
+	1
+);
+
+-- Insert for Concession table 
+INSERT INTO concession
+VALUES(
+	1,
+	'Beer',
+	1
+);
+
+-- Insert for Movie table 
+INSERT INTO movie
+VALUES(
+	1,
+	'Troy'
+),
+(
+	2,
+	'Fury'
+);
+
+SELECT *
+FROM movie;

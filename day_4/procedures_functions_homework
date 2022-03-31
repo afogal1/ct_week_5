@@ -1,0 +1,87 @@
+-- EXPLORE DATA ON PAYMENT TABLE
+SELECT *
+FROM payment
+WHERE customer_id = 341;
+
+
+-- 1) Stored Procedure Example 
+-- Simulate Late Fee Charge 
+
+CREATE OR REPLACE PROCEDURE latefee(
+	customer INTEGER,
+	lateFeeAmount DECIMAL
+
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	-- Add late fee to payment amount
+	UPDATE payment
+	SET amount = amount + lateFeeAmount
+	WHERE payment_date >= DATE '2007-02-16';
+	
+	
+	-- commit statement inside of transaction
+	COMMIT;
+	
+END;
+$$
+
+-- CALLING STORED PROCEDURE 
+CALL latefee(341,101.01);
+
+
+-- 2) another way to solve 
+-- Stored Procedure Example 
+-- Simulate Late Fee Charge 
+CREATE OR REPLACE PROCEDURE better_better_latefee( 
+	lateFeeAmount DECIMAL
+)
+LANGUAGE plpgsql
+AS $$  
+BEGIN
+	UPDATE payment 
+	SET amount = amount + lateFeeAmount
+ 	WHERE rental_id IN (
+		SELECT rental_id
+		FROM rental
+ 		WHERE days_rented > interval '4 days'
+		);
+	COMMIT; 
+END; 
+$$
+
+-- CALLING STORED PROCEDURE 
+CALL better_better_latefee(2.75);
+
+-- DROP PROCEDURE 
+DROP PROCEDURE better_better_latefee;
+
+
+-- Stored Function Example 
+-- Insert Actor into actor table 
+
+CREATE OR REPLACE FUNCTION add_actor( -- specify inputs... <name> <datatype>
+	_actor_id INTEGER,
+	_first_name VARCHAR,
+	_last_name VARCHAR,
+	_last_update TIMESTAMP WITHOUT TIME ZONE 
+)
+RETURNS void -- what function returns
+AS $MAIN$
+BEGIN 
+	INSERT INTO actor(actor_id, first_name, last_name, last_update)
+	VALUES(_actor_id, _first_name, _last_name, _last_update); -- specify values
+END;
+$MAIN$
+LANGUAGE plpgsql;
+
+-- Don't say:
+-- CALL add_actor(...)
+
+-- correct way to call this function:
+SELECT add_actor(500, 'Ryan', 'Reynolds', NOW()::timestamp )
+
+SELECT *
+FROM actor
+WHERE actor_id = 500;
