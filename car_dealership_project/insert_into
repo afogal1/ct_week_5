@@ -1,0 +1,63 @@
+INSERT INTO
+	car (car_id, make, model, on_the_market, year_, miles)
+VALUES 
+	(2, 'Chevrolet', 'Corvette', 'False', 2005, 25000),
+	(3, 'Chevrolet', 'Tahoe', 'True', 2016, 0),
+	(4, 'Chevrolet', 'Traverse', 'False', 2020, 0),
+	(5, 'Chevrolet', 'Silverado', 'True', 2019, 0),
+    (6, 'Chevrolet', 'Camaro', 'True', 2014, 50000),
+	(7, 'Chevrolet', 'Trailblazer', 'False', 2013, 70000);
+	
+SELECT *
+FROM car;
+
+INSERT INTO
+	customer (customer_id, first_name, last_name, service_type, car_id)
+VALUES 
+	(1, 'Bob', 'Dylan', 'oil change', 7),
+	(2, 'Leory', 'Jankins', 'transmission fluid replacement', 2),
+	(3, 'Bruce', 'Wills', 'brake pad replacement', 4);
+
+ALTER TABLE customer
+DROP service_type;
+
+INSERT INTO
+	service_ticket (service_ticket_id, customer_id, car_id)
+VALUES 
+	(1, 1, 7),
+	(2, 2, 2),
+	(3, 3, 4);
+	
+INSERT INTO
+	staff (staff_id, staff_type, first_name, last_name)
+VALUES 
+	(1, 'Mechanic', 'John', 'Deere'),
+	(2, 'Salesmen', 'Alex', 'Fogal');
+	
+INSERT INTO
+	staff (staff_id, staff_type, first_name, last_name)
+VALUES
+	(3, 'Manager', 'Tim', 'Dunkin');
+	
+INSERT INTO 
+	service (service_id, car_id, miles, type_of_service, staff_id, parts_added, service_ticket_id)
+VALUES 
+	(1, 7, 100000, 'oil change', 1, 'none', 1),
+	(2, 2, 900000, 'transmission fluid change', 1, 'none', 2),
+	(3, 4, 227000, 'brake-pad change', 1, 'brakes', 3);
+	
+SELECT *
+FROM service;
+
+ALTER TABLE service
+ADD COLUMN service_cost NUMERIC(8,2);
+
+INSERT INTO 
+	service (service_id, car_id, miles, type_of_service, staff_id, parts_added, service_ticket_id, service_cost)
+VALUES 
+	(1, 7, 100000, 'oil change', 1, 'none', 1, 25.00),
+	(2, 2, 900000, 'transmission fluid change', 1, 'none', 2, 70.00),
+	(3, 4, 227000, 'brake-pad change', 1, 'brakes', 3, 150.00);
+
+SELECT *
+FROM service;
